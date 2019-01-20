@@ -2,10 +2,15 @@ package com.el.web.controller;
 
 import com.el.web.service.DeferredResultQueue;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
@@ -79,5 +84,56 @@ public class AsyncController {
 
         System.out.println("主线程结束："+Thread.currentThread().getName()+"执行时间："+System.currentTimeMillis());
         return callable;
+    }
+    private SseEmitter sseEmitter=new SseEmitter();
+    private DeferredResult<String> deferredResult=new DeferredResult<>();
+    /**
+     * Callback和DeferredResult用于设置单个结果,如果有多个结果需要返回给客户端时，可以使用SseEmitter以及ResponseBodyEmitter等；
+     */
+    //返回SseEmitter对象
+    @RequestMapping("/testSseEmitter")
+    public SseEmitter testSseEmitter(){
+        return new SseEmitter();
+    }
+
+    /**
+     * 向SseEmitter发送数据
+     * @return
+     */
+    @RequestMapping("/setSseEmitter")
+    public String setSseEmitter(){
+        try {
+            sseEmitter.send(System.currentTimeMillis());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "success";
+    }
+
+    /**
+     * 第一步访问：http://localhost/test/testSseEmitter
+     * 第二步连续访问：http://localhost/test/setSseEmitter
+     * 第三步访问：http://localhost/test/completeSseEmitter
+     * 可以看到结果，只有当第三步执行后，第一步的访问才算结束。
+     * @return
+     */
+    //将SseEmitter对象设置完成
+    @RequestMapping("/completeSseEmitter")
+    public String completeSseEmitter(){
+        sseEmitter.complete();
+        return "success";
+    }
+    /**
+     * 用于直接将结果写出到Response的OutputStream中； 如文件下载等，
+     */
+    @GetMapping("/download")
+    public StreamingResponseBody handle(){
+        return new StreamingResponseBody() {
+            @Override
+            public void writeTo(OutputStream outputStream) throws IOException {
+                System.out.println("执行了");
+            }
+        };
     }
 }

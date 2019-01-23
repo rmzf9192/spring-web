@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <!--配置一个bean-->
+    <bean id="helloWorld" class="com.el.spring.xml.helloworld.HelloWorld">
+        <!--为属性赋值-->
+        <!-- 通过属性注入: 通过 setter 方法注入属性值 -->
+        <property name="user" value="Jerry"/>
+    </bean>
+    <!--通过构造器注入属性值-->
+    <bean id="helloWorld2" class="com.el.spring.xml.helloworld.HelloWorld" scope="prototype">
+        <!-- 要求: 在 Bean 中必须有对应的构造器.  -->
+       <constructor-arg value="Mike"/>
+    </bean>
+
+    <!--若一个bean有多个构造器，如何通过构造器为bean的属性赋值
+      可以根据index和value进行更加精确的定位-->
+    <bean id="car" class="com.el.spring.xml.helloworld.Car" scope="prototype">
+        <constructor-arg value="KuGA" index="1"/>
+        <constructor-arg value="changfu" index="0"/>
+        <constructor-arg value="250000" type="int"/>
+    </bean>
+
+    <bean id="car2" class="com.el.spring.xml.helloworld.Car" >
+        <constructor-arg value="ChangAnMazda"></constructor-arg>
+        <constructor-arg>
+            <value><![CDATA[<ATARZA>]]></value>
+        </constructor-arg>
+        <constructor-arg value="180" type="int"/>
+    </bean>
+   <bean id="dao" class="com.el.spring.ref.Dao"/>
+    <bean id="service" class="com.el.spring.ref.Service">
+        <!-- 通过 ref 属性值指定当前属性指向哪一个 bean! -->
+        <property name="dao" ref="dao"/>
+    </bean>
+
+</beans>

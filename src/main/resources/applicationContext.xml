@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+      1.默认情况下，IOC容器中的bean是单例的，若对象是单例的，则在IOC创建容器时即创建bean实例，并对bean的属性进行初始化。
+      2.可以通过bean的scope属性来修改bean的作用域，若取值为prototype,则bean为原型的，每次向容器中获取bean,得到一个新的对象。
+      3.IOC的生命周期
+        3.1 一般，讨论bean的生命周期，是建立在bean是单例的基础上。
+        3.2 还可以为bean指定init和destory
+        3.3 通过bean的后置处理器更加丰富bean的生命周期方法。
+    -->
+    <bean id="hellWorld" class="com.el.spring.xml.helloworld.HelloWorld"
+    scope="singleton" init-method="init" destroy-method="destory"
+    >
+        <property name="user" value="小明"/>
+    </bean>
+
+    <!--
+       1.在IOC容器中配置bean之间的关系
+    -->
+    <bean id="userDao" class="com.el.spring.annotation.UserDao">
+    </bean>
+
+    <bean id="usreService" class="com.el.spring.annotation.UsreService">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="userAction" class="com.el.spring.annotation.UserAction">
+        <property name="usreService" ref="usreService"/>
+    </bean>
+
+</beans>

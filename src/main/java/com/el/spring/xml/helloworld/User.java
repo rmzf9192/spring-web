@@ -44,11 +44,16 @@ public class User {
 		System.out.println("User's Construtor...");
 	}
 
+
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", cars=" + cars + "]";
+		return "User{" +
+				"userName='" + userName + '\'' +
+				", cars=" + cars +
+				", wifeName='" + wifeName + '\'' +
+				'}';
 	}
-	
+
 	public void init(){
 		System.out.println("init method...");
 	}

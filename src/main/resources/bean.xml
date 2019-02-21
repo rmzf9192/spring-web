@@ -33,10 +33,68 @@
         </constructor-arg>
         <constructor-arg value="180" type="int"/>
     </bean>
-   <bean id="dao" class="com.el.spring.ref.Dao"/>
+   <bean id="dao5" class="com.el.spring.ref.Dao"/>
     <bean id="service" class="com.el.spring.ref.Service">
         <!-- 通过 ref 属性值指定当前属性指向哪一个 bean! -->
-        <property name="dao" ref="dao"/>
+        <property name="dao" ref="dao5"/>
     </bean>
 
+    <!--声明使用内部bean-->
+    <bean id="service1" class="com.el.spring.ref.Service">
+        <property name="dao">
+            <bean class="com.el.spring.ref.Dao">
+                <property name="dataSource" value="c3p0"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="action" class="com.el.spring.ref.Action">
+        <property name="service" ref="service1"/>
+        <!--设置级联属性（了解）-->
+        <property name="service.dao.dataSource" value="DBCP2"></property>
+    </bean>
+
+    <bean id="dao2" class="com.el.spring.ref.Dao">
+        <!--为Dao的属性值dataSource为null，若一个属性值不为null,可以赋值为null-->
+        <property name="dataSource"><null></null></property>
+    </bean>
+
+    <bean id="user" class="com.el.spring.xml.helloworld.User">
+        <property name="userName" value="jack"/>
+        <property name="wifeName" value="xiaomao"/>
+       <property name="cars">
+           <!--使用list元素来装配集合属性-->
+           <list>
+               <ref bean="car"/>
+               <ref bean="car2"/>
+           </list>
+       </property>
+    </bean>
+
+    <!--声明集合类型的bean-->
+    <util:list id="cars">
+        <ref bean="car"/>
+        <ref bean="car2"/>
+    </util:list>
+
+    <bean id="user2" class="com.el.spring.xml.helloworld.User">
+        <property name="userName" value="xiaoxiao"/>
+        <property name="wifeName" value="小猫"/>
+        <!--引用外部list集合-->
+        <property name="cars" ref="cars"/>
+    </bean>
+
+    <bean id="user3" class="com.el.spring.xml.helloworld.User"
+    p:cars-ref="cars" p:userName="小胡子"></bean>
+
+    <!-- bean 的配置能够继承吗 ? 使用 parent 来完成继承 -->
+    <bean id="user4" class="com.el.spring.xml.helloworld.User"
+    parent="user" p:userName="Bob"></bean>
+
+    <bean id="user6" class="com.el.spring.xml.helloworld.User"
+          parent="user" p:userName="维多利亚"></bean>
+
+    <!--测试depend-on-->
+    <bean id="user5" class="com.el.spring.xml.helloworld.User"
+   parent="user" p:userName="user5测试" depends-on="user6"></bean>
 </beans>

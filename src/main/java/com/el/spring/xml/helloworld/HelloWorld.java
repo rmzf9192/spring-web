@@ -30,4 +30,11 @@ public class HelloWorld {
     public void hello(){
         System.out.println("Hello: " + user);
     }
+
+    public void init(){
+        System.out.println("init method running......");
+    }
+    public void destory(){
+        System.out.println("destory method running......");
+    }
 }

@@ -10,6 +10,7 @@ import com.el.spring.ref.Service;
 import com.el.spring.xml.helloworld.Car;
 import com.el.spring.xml.helloworld.HelloWorld;
 import com.el.spring.xml.helloworld.User;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -28,6 +29,20 @@ import java.util.Date;
  */
 @Slf4j
 public class HelloWorldTest {
+
+
+    @Test
+    public void testHelloWorld(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        /*HelloWorld helloWorld = (HelloWorld) context.getBean("helloWorld");
+        HelloWorld helloWorld1 = (HelloWorld) context.getBean("helloWorld");
+        log.info("helloWorld is equal helloWorld1 {}",helloWorld == helloWorld1);
+        log.info("hellloWorld = {}",helloWorld);
+        ((ClassPathXmlApplicationContext) context).close();*/
+        UserAction userAction = (UserAction) context.getBean("userAction");
+        UserAction userAction1 = (UserAction) context.getBean("userAction");
+        userAction.execute();
+    }
 
 
 

@@ -10,23 +10,25 @@
         3.2 还可以为bean指定init和destory
         3.3 通过bean的后置处理器更加丰富bean的生命周期方法。
     -->
-    <bean id="hellWorld" class="com.el.spring.xml.helloworld.HelloWorld"
-    scope="singleton" init-method="init" destroy-method="destory"
-    >
+    <!--<bean id = "helloWorld" class="com.el.spring.xml.helloworld.HelloWorld">
+        <property name="user" value="小明"/>
+    </bean>-->
+    <bean id="helloWorld" class="com.el.spring.xml.helloworld.HelloWorld"
+    scope="singleton" init-method="init" destroy-method="destory" >
         <property name="user" value="小明"/>
     </bean>
 
     <!--
        1.在IOC容器中配置bean之间的关系
     -->
-    <bean id="userDao" class="com.el.spring.annotation.UserDao">
+    <bean id="userDao" class="com.el.spring.annotation.UserDao" scope="prototype">
     </bean>
 
     <bean id="usreService" class="com.el.spring.annotation.UsreService">
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <bean id="userAction" class="com.el.spring.annotation.UserAction">
+    <bean id="userAction" class="com.el.spring.annotation.UserAction" scope="prototype">
         <property name="usreService" ref="usreService"/>
     </bean>
 

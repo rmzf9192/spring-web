@@ -76,7 +76,5 @@
 
     <!--通过FactoryBean的方式创建bean的实例了解-->
     <bean id="user" class="com.el.spring.ref.UserBean">
-
-
     </bean>
 </beans>

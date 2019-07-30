@@ -38,20 +38,79 @@
       <version>3.0-alpha-1</version>
       <scope>provided</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.18</version>
-      <scope>provided</scope>
+      <version>1.18.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.2.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.25</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.25</version>
+      <!--<scope>test</scope>-->
+    </dependency>
+
+    <!--另外一种打印日志方式-->
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.projectlombok/lombok &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.projectlombok</groupId>-->
+      <!--<artifactId>lombok</artifactId>-->
+      <!--<version>1.18.0</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.slf4j</groupId>-->
+      <!--<artifactId>slf4j-api</artifactId>-->
+      <!--<version>1.7.25</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/ch.qos.logback/logback-classic &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>ch.qos.logback</groupId>-->
+      <!--<artifactId>logback-classic</artifactId>-->
+      <!--<version>1.2.3</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.junit.jupiter</groupId>-->
+      <!--<artifactId>junit-jupiter-api</artifactId>-->
+      <!--<version>5.2.0</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+
+
 
     <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
     <dependency>

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 @Data
 public class UsreService {
 	@Autowired
@@ -16,5 +16,5 @@ public class UsreService {
 		System.out.println("添加新用户");
 		userDao.save();
 	}
-	
+
 }
